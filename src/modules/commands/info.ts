@@ -35,7 +35,8 @@ export default class extends Module {
         const hash = rev.indexOf(':') === -1 ? rev : branchHash;
         const hashText = `Commit hash: ${hash.substring(0, 7)}`;
         this.log(hashText);
-        text.push(hashText);
+        text.push(`${hashText} (${process.env.npm_package_version})`);
+
 
         // uptime
         const uptime = process.uptime();
