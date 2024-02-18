@@ -130,11 +130,11 @@ export default {
     },
     games: {
         reversi: {
-            started: (name: string, url: string): string => `${name}と対局を始めました！\n[観戦する](${url})`,
-            win: (name: string): string => `${name}に勝ちました！`,
-            lose: (name: string): string => `${name}に負けました`,
-            draw: (name: string): string => `${name}と引き分けました`,
-            surrendered: (name: string): string => `${name}が投了しちゃいました`,
+            started: (name: string, url: string): string => `${name}と対局を始めました！\n[観戦する](${url}) #oishiiReversi`,
+            win: (name: string): string => `${name}に勝ちました！ #oishiiReversi`,
+            lose: (name: string): string => `${name}に負けました #oishiiReversi`,
+            draw: (name: string): string => `${name}と引き分けました #oishiiReversi`,
+            surrendered: (name: string): string => `${name}が投了しちゃいました #oishiiReversi`,
         },
     },
 };
