@@ -97,3 +97,8 @@ npm start
 Xeltica さんの Citrine から参考にさせていただきました。
 
 <https://github.com/Xeltica/Citrine/blob/master/Resources/ngwords.txt>
+
+## ばすきー用フォーク仕様
+
+- `/info` コマンドで`package.json`のバージョンを出力するようにしました。
+- NGワードを追加しました。
