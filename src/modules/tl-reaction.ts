@@ -23,9 +23,9 @@ export default class extends Module {
         const foundFood = foods.filter((food) => food.keywords.some((keyword) => nouns.includes(keyword)));
 
         if (foundFood.length === 0) return;
+        this.log(`found emojis: ${foundFood}`);
 
         const reactEmoji = chooseOneFromArr(foundFood).emoji;
-
         note.reaction(reactEmoji);
         this.log(`Reacted: ${reactEmoji}`);
     }
