@@ -3,9 +3,10 @@ import ms from 'ms';
 import pg from 'pg';
 import { Config } from './config.js';
 import messages from './messages.js';
-import API, { User } from './misskey/api.js';
+import API, { Emoji, User } from './misskey/api.js';
 import NGWord from './ng-words.js';
 import { ReconnectWS } from './websocket.js';
+import { chooseOneFromArr } from './utils/cofa.js';
 
 export interface Row {
     name: string;
@@ -31,6 +32,7 @@ export class Bot {
     public api: API;
     public account!: User;
     public encodeMode = false;
+    public emojis: Emoji[] = [];
 
     constructor(config: Config, ngWords: NGWord) {
         this.config = config;
@@ -49,6 +51,7 @@ export class Bot {
         this.api = new API(this);
 
         this.getAccount();
+        this.getEmojis();
 
         setInterval(() => {
             this.rateLimit = 0;
@@ -68,6 +71,11 @@ export class Bot {
 
     private async getAccount() {
         this.account = await this.api.call<User>('i').then((res) => res.body);
+    }
+    private async getEmojis() {
+        const emojis = await this.api.getEmojis();
+        this.log(`Emoji loaded: ${emojis.length}`);
+        this.emojis = emojis;
     }
 
     log(text?: string, ...arg: unknown[]): void {
@@ -174,6 +182,7 @@ export class Bot {
                 row.name = iconv.decode(Buffer.from(name), 'Shift_JIS');
             });
         }
+        res.rows.forEach((row) => row.name = this.toCustomEmojis(row?.name));
         return res;
     }
 
@@ -183,7 +192,7 @@ export class Bot {
         const learned = Math.random() < 0.2;
         const res = await this.getRandomFood({ learned });
 
-        const food = res.rows[0].name;
+        const food = this.toCustomEmojis(res.rows[0].name);
         const good = res.rows[0].good;
         this.log(`sayFood: ${food} (${good})`);
 
@@ -200,5 +209,20 @@ export class Bot {
             values: [userId],
         };
         return await this.runQuery(query);
+    }
+
+    // カスタム絵文字に変換する
+    toCustomEmojis(food: string): string {
+        // カスタム絵文字のショートコードでない場合は無視
+        if(! /^[a-zA-Z0-9]+$/.test(food)) return food;
+
+        console.log(`${food}is likely shortcode`);
+
+        const suggest = this.emojis.filter((e) => e.name.indexOf(food) != -1);
+
+        // 該当する絵文字が見つからない場合は無視
+        if(suggest.length == 0) return food;
+
+        return `:${chooseOneFromArr(suggest).name}:`;
     }
 }

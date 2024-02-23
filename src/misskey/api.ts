@@ -50,6 +50,15 @@ export interface ReversiInvitedRes {
     user: User;
 }
 
+export interface Emoji {
+    aliases: string[];
+    name: string;
+    category: string;
+    url: string;
+    isSensitive: string | undefined;
+    isLocal: string | undefined;
+}
+
 export default class API {
     constructor(private bot: Bot) {}
 
@@ -109,6 +118,10 @@ export default class API {
             reaction,
         };
         return (await this.call('notes/reactions/create', data)).ok;
+    }
+
+    async getEmojis(): Promise<Emoji[]> {
+        return (await this.call<{emojis: Emoji[]}>('emojis', {})).body.emojis;
     }
 }
 
