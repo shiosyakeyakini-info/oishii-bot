@@ -1,7 +1,7 @@
 export default {
     food: {
         good: '((おい|美味)し|(まず|マズ|不味)く(な|にゃ)|うま|旨)い',
-        bad: '(まず|マズ|不味|(おい|美味)しく(な|にゃ)|(うま|旨)く(な|にゃ))い',
+        bad: '((まず|マズ|不味|(おい|美味)しく(な|にゃ)|(うま|旨)く(な|にゃ))|(た|食)べら?れ?な)い',
         foods: [
             { emoji: '🍇', keywords: ['🍇', 'grapes', 'ぶどう', 'ブドウ', '葡萄'] },
             { emoji: '🍈', keywords: ['🍈', 'melon', 'メロン', '舐瓜'] },
@@ -355,7 +355,7 @@ export default {
             { emoji: ':jamoca_almond_fudge:', keywords: ['ジャモカアーモンドファッジ']},
             { emoji: ':jamoca_coffee:', keywords: ['ジャモカコーヒー']},
             { emoji: ':lemon_sorbet:', keywords: ['レモンシャーベット']},
-            { emoji: ':love_potion_31:', keywords: ['ラブポ']},
+            { emoji: ':love_potion_31:', keywords: ['ラブポ', 'ラブポーションサーティーワン', 'ラブポーション']},
             { emoji: ':magical_mint_night:', keywords: ['マジカルミッドナイト']},
             { emoji: ':musk_melon:', keywords: ['マスクメロン']},
             { emoji: ':nuts_to_you:', keywords: ['ナッツトゥーユー']},
