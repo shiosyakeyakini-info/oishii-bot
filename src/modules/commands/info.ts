@@ -3,6 +3,7 @@ import ms from 'ms';
 import { Bot } from '../../bot.js';
 import { Note } from '../../misskey/note.js';
 import Module from '../../module.js';
+import { botVersion } from '../../utils/version.js';
 
 export default class extends Module {
     Name = 'Info';
@@ -35,7 +36,7 @@ export default class extends Module {
         const hash = rev.indexOf(':') === -1 ? rev : branchHash;
         const hashText = `Commit hash: ${hash.substring(0, 7)}`;
         this.log(hashText);
-        text.push(`${hashText} (${process.env.npm_package_version})`);
+        text.push(`${hashText} (${botVersion})`);
 
 
         // uptime
