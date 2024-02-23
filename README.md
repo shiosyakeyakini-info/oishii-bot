@@ -103,3 +103,4 @@ Xeltica さんの Citrine から参考にさせていただきました。
 - `/info` コマンドで`package.json`のバージョンを出力するようにしました。
 - NGワードを追加しました。
 - リバーシのノートに`#oishiiReversi`のハッシュタグをつけるようにしました。
+- [pm2](https://pm2.keymetrics.io/)で起動できるようにしました。別途`npm -g install pm2`が必要です。
