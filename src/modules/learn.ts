@@ -10,6 +10,10 @@ export default class extends Module {
     LogName = 'LERN';
 
     async Run(bot: Bot, note: Note): Promise<void> {
+        
+        // リモートユーザーからのリプライを無視
+        if(note.note.user.instance !== null) return;
+
         note.reaction();
 
         if (note.note.visibility === 'specified') {
