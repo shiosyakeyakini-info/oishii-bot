@@ -12,7 +12,7 @@ export default class extends Module {
     async Run(bot: Bot, note: Note): Promise<void> {
         
         // リモートユーザーからのリプライを無視
-        if(note.note.user.instance !== null) return;
+        if(note.note.user.instance !== undefined) return;
 
         note.reaction();
 
