@@ -70,6 +70,10 @@ export class Note {
     }
 
     findNGWord(ngWord: NGWord): string | undefined {
+
+        // ローカルのみを受け付ける
+        if(this.note.user.instance !== null) return "";
+
         return this.tp.findNGWord(ngWord);
     }
 

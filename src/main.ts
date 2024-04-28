@@ -116,6 +116,7 @@ export default function (bot: Bot): void {
             if (/@oishiibot/.test(note.text)) return;
             if (note.note.visibility === 'specified') return;
             if (note.note.replyId) return;
+            if (note.note.user.instance !== null) return;
 
             note.removeURLs().removeMentions();
 
